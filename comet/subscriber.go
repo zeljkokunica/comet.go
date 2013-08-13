@@ -2,7 +2,7 @@ package comet
 
 import (
 	"time"
-	"l"
+	"github.com/zeljkokunica/comet.go/l"
 )
 
 const (

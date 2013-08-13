@@ -1,7 +1,7 @@
 package comet
 
 import (
-	"l"
+	"github.com/zeljkokunica/comet.go/l"
 	"time"
 	"fmt"
 	"net/http"

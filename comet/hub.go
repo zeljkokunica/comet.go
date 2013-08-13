@@ -3,7 +3,7 @@ package comet
 import (
 	"strings"
 	"time"
-	"l"
+	"github.com/zeljkokunica/comet.go/l"
 	"fmt"
 	"io"
 	"crypto/rand"

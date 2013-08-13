@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"encoding/json"
 	"time"
-	"l"
+	"github.com/zeljkokunica/comet.go/l"
 )
 
 type HubStatusSubscriber struct {
