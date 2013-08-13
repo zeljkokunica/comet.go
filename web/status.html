@@ -1,0 +1,47 @@
+<html>
+<head>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+   <script src="/gocomet.js" type="text/javascript"></script>
+   <script>
+     function onNewData(command, channel, version, data) {
+         debugger;
+        var json = JSON.parse(data);
+        var subscriberList = "Subscribers: " + json.subscribers.length;
+        //jQuery.each(json.subscribers, function(index, subscriber){
+        //  subscriberList += "<br/>" + subscriber.id;
+        //});
+        jQuery("#subscribers").html(subscriberList);        
+        
+        var channelList = "Channels: ";
+        jQuery.each(json.channels, function(index, channel){
+          channelList += "<br/>" + channel.channelName;
+        });
+        jQuery("#channels").html(channelList);
+        jQuery("#stats").html("routines: " + json.statistics.routines);
+     }
+
+     new GoComet({
+         channels: ["system"], 
+         onDataListener: onNewData,
+         ip: window.location.host,
+         useSSL: false,
+         crossDomain: true
+       })
+  </script>   
+</head>
+<body>
+  <div>
+    <h1>Subscribers</h1>
+    <div id="subscribers">
+    </div>
+  </div>
+  <div>
+    <h1>Channels</h1>
+    <div id="channels"></div>
+  </div>
+  <div>
+    <h1>Stats</h1>
+    <div id="stats"></div>
+  </div>
+</body>
+</html>

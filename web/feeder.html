@@ -1,0 +1,52 @@
+<html>
+<head>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+   <script>
+     var i = 0;
+     var clearFunc = function() {
+    	 i = 0;
+    	 $.ajax({
+	         url: "/clear?channel=global&data=1",
+	         context: document.body
+	       })
+	       .complete(function(a, b){
+	    	   func();
+	       });
+     }
+     var func = function() { 
+       i++; 
+       if (i > 500) {
+    	   clearFunc();
+       }
+       var url = "/update?channel=global&data=" + i;
+	     $.ajax({
+	         url: url,
+	         context: document.body
+	       })
+	       .complete(function(a, b){
+	    	   setTimeout(function(){
+	    		   func()
+	    		   }, 500);
+	       });
+     }
+     $.ajax({
+         url: "/clear?channel=global",
+         context: document.body
+       })
+       .complete(function(a, b){
+    	   $.ajax({
+    	         url: "/create?channel=global&data=-1",
+    	         context: document.body
+    	       })
+    	       .complete(function(a, b){
+    	    	   func();
+    	       });
+    	   
+    	   
+       });
+     
+  </script>   
+</head>
+<body>
+</body>
+</html>

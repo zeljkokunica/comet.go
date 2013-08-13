@@ -3,7 +3,7 @@ package comet
 import (
 	"code.google.com/p/go.net/websocket"
 	"encoding/json"
-	"github.com/zeljkokunica/comet.go/l"
+	"github.com/zeljkokunica/l"
 	"fmt"
 	"strings"
 	"time"

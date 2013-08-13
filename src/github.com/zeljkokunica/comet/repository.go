@@ -1,7 +1,7 @@
 package comet
 
 import (
-	"github.com/zeljkokunica/comet.go/l"
+	"github.com/zeljkokunica/l"
 	"io/ioutil"
 	"encoding/json"
 	"log"

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+   <script src="/gocomet.js" type="text/javascript"></script>
+   <script>
+     function onNewDataLongPoll(command, channel, version, data) {
+    	 if (command == "clear") {
+    		 $("#lp" + channel).html("CLEARED channel");
+    	 }
+    	 else if (command == "create") {
+    		 $("#lp" + channel).html("CREATED channel: " + channel + ", version: " + version + ", data: " + data);
+    	 }
+    	 else {
+    		 $("#lp" + channel).html("UPDATED channel: " + channel + ", version: " + version + ", data: " + data);
+    	 }
+     }
+     
+     function onNewDataWS(command, channel, version, data) {
+    	 if (command == "clear") {
+    		 $("#ws" + channel).html("CLEARED channel");
+    	 }
+    	 else if (command == "create") {
+    		 $("#ws" + channel).html("CREATED channel: " + channel + ", version: " + version + ", data: " + data);
+    	 }
+    	 else {
+    		 $("#ws" + channel).html("UPDATED channel: " + channel + ", version: " + version + ", data: " + data);
+    	 }
+     }
+     
+     function addTestChannel() {
+    	 cometLongPoll.addChannels(['test']);
+    	 cometWS.addChannels(['test']);
+     }
+     
+     function removeTestChannel() {
+    	 cometLongPoll.removeChannels(['test']);
+    	 cometWS.removeChannels(['test']);
+     }
+     //var comet = GoComet.create(["global"], onNewData);
+     var cometLongPoll = new GoComet({
+    	 channels: ["global"], 
+    	 onDataListener: onNewDataLongPoll,
+    	 forceLongPoll: true,
+    	 onSubscribed: function(id){console.log("LP subscribed " + id)},
+     	 onClosed: function(){console.log("LP closed")},
+     	 debug: false,
+     	 ip: window.location.host,
+     	 useSSL: false,
+     	 crossDomain: true
+     });
+     console.log("Long poll connection: " + cometLongPoll.connectionType());
+
+     
+     var cometWS = new GoComet({
+    	 channels: ["global"], 
+    	 onDataListener: onNewDataWS,
+    	 onSubscribed: function(id){console.log("WS subscribed " + id)},
+    	 onClosed: function(){console.log("WS closed")},
+    	 debug: false,
+    	 ip: window.location.host,
+    	 useSSL: false,
+    	 crossDomain: true
+     });
+     console.log("Web socket connection: " + cometWS.connectionType());
+     
+
+  </script>   
+</head>
+<body>
+	<input type="button" onclick="addTestChannel()" value="sub">
+	<input type="button" onclick="removeTestChannel()" value="unsub">
+	
+	<h1>Long poll</h1>
+	<div id="lptest" style="background-color: yellow"></div>
+	<div id="lpglobal">
+	</div>
+	<h1>Web socket</h1>
+	<div id="wstest" style="background-color: yellow"></div>
+	<div id="wsglobal">
+	</div>
+</body>
+</html>
