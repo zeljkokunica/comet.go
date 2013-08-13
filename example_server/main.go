@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"github.com/zeljkokunica/comet.go/l"
 	"github.com/zeljkokunica/comet.go/comet"
 	"code.google.com/p/go.net/websocket"
 	"flag"
